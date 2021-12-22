@@ -22,7 +22,14 @@ func TestFromReader(t *testing.T) {
 			Expected:    NetString("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"),
 			ExpectedErr: false,
 		},
+		{
+			Title:       "Happy flow shorter than default value",
+			Reader:      strings.NewReader("4:Test,"),
+			Expected:    NetString("Test"),
+			ExpectedErr: false,
+		},
 	}
+
 	for _, tc := range testCases {
 		fmt.Println(tc.Title)
 		output, err := FromReader(tc.Reader)
