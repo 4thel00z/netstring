@@ -45,7 +45,9 @@ func FromReader(reader io.Reader) (NetString, error) {
 
 	lengthRight := len(right)
 	readme := length - lengthRight + 1 // "+ 1" is for the "," at the end
-
+	if readme <= 0 {
+		return FromBytes(right[:length+1])
+	}
 	rest := make([]byte, readme)
 
 	n, err := io.ReadAtLeast(reader, rest, readme)
